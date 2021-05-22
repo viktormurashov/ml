@@ -1,11 +1,24 @@
-import cv2, time
+import cv2, time, os
+from os import path
 
 def createImages():
     cam = cv2.VideoCapture(0)
 
+    if not path.exists('./images'):
+        os.mkdir('./images')
+
+    if not path.exists('./images/rgb'):
+        os.mkdir('./images/rgb')
+
+    if not path.exists('./images/jpeg'):
+        os.mkdir('./images/jpeg')
+
+    if not path.exists('./images/gray'):
+        os.mkdir('./images/gray')
+
     img_counter = 0
 
-    while True:
+    for i in range(0, 10):
         ret, frame = cam.read()
 
         # problem with camera
@@ -28,13 +41,13 @@ def createImages():
             break
 
         rgb_img_name = "rgb_{}.bmp".format(img_counter)
-        cv2.imwrite("B:/ml/images/rgb/{}".format(rgb_img_name), rgb)
+        cv2.imwrite("./images/rgb/{}".format(rgb_img_name), rgb)
 
         jpeg_img_name = "jpeg_{}.jpeg".format(img_counter)
-        cv2.imwrite("B:/ml/images/jpeg/{}".format(jpeg_img_name), rgb)
+        cv2.imwrite("./images/jpeg/{}".format(jpeg_img_name), rgb)
 
         gray_img_name = "gray_{}.png".format(img_counter)
-        cv2.imwrite("B:/ml/images/gray/{}".format(gray_img_name), gray)
+        cv2.imwrite("./images/gray/{}".format(gray_img_name), gray)
 
         img_counter += 1
 
