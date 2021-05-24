@@ -18,7 +18,7 @@ def createImages():
 
     img_counter = 0
 
-    for i in range(0, 10):
+    while True:
         ret, frame = cam.read()
 
         # problem with camera
